@@ -52,8 +52,10 @@
 	}
 
 	#imgprint5 {
-		height: 300px !important;
+		width: 185px !important;
 		page-break-before: always !important;
 	}
+
+	footer, .footer{display: none;}
 	
 } 

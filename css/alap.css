@@ -219,55 +219,5 @@ html {
  
 body,header, .header {border-radius:20px 20px 0px 0px; }
 
-@media print {
 
-	@import url("./alap.css");
-
-	@page {
-		margin: 2cm;
-	 }
-	
-	html {
-	
-		background:white;
-	}
-	body  {
-		width:100%;
-		font-family:'Times New Roman', Times, serif;
-		background:white;
-		min-width:100%;
-		max-width:100%;
-		box-shadow:initial;
-	}
-
-	figure, .responsive, .responsiveW {
-		page-break-before: always !important;
-	}
-
-	header, .header {display: none;}
-
-	video {display: none;}
-	nav {display:none;}
-	aside {display: none;}
-
-	#video {display: none;}
-
-	tr {color: black !important;}
-
-	#imgprint {
-		height: 450px;
-		page-break-before: always !important;
-	}
-
-	#imgprint2 {
-		height: 605px !important;
-		page-break-before: always !important;
-	}
-
-	#imgprint3 {
-		height: 350px !important;
-		page-break-before: always !important;
-	}
-	
-}
   
