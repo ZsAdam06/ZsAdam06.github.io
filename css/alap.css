@@ -155,6 +155,7 @@ a.nav-link.active {
 
 .forrasok>li>a, .forrasok {
 	color: black !important;
+	width: 80% !important;
 }
 
 .forrasok>li>a:visited {

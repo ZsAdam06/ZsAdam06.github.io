@@ -45,5 +45,15 @@
 		height: 350px !important;
 		page-break-before: always !important;
 	}
+
+	#imgprint4 {
+		height: 400px !important;
+		page-break-before: always !important;
+	}
+
+	#imgprint5 {
+		height: 300px !important;
+		page-break-before: always !important;
+	}
 	
 } 
