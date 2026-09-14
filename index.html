@@ -105,6 +105,12 @@
       color: transparent;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
     .nav-links {
       display: flex;
       gap: 28px;
@@ -120,6 +126,26 @@
     }
 
     .nav-links a:hover { color: var(--text); }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 7px;
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+
+    .lang-btn:hover { opacity: 0.8; }
+    .lang-btn.active { opacity: 1; border-color: var(--accent); }
 
     .nav-toggle {
       display: none;
@@ -743,6 +769,7 @@
       .hero-actions { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
 
+      .nav-right { gap: 12px; }
       .nav-toggle { display: block; }
       .nav-links {
         display: none;
@@ -768,14 +795,20 @@
   <nav>
     <div class="nav-inner">
       <a href="#" class="logo">Zsóri <span>Ádám</span></a>
-      <button class="nav-toggle" aria-label="Menü">☰</button>
-      <ul class="nav-links">
-        <li><a href="#rolam">Rólam</a></li>
-        <li><a href="#tapasztalat">Tapasztalat</a></li>
-        <li><a href="#skillek">Skillek</a></li>
-        <li><a href="#projektek">Projektek</a></li>
-        <li><a href="#kapcsolat">Kapcsolat</a></li>
-      </ul>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#rolam" data-i18n="nav.rolam">Rólam</a></li>
+          <li><a href="#tapasztalat" data-i18n="nav.tapasztalat">Tapasztalat</a></li>
+          <li><a href="#skillek" data-i18n="nav.skillek">Skillek</a></li>
+          <li><a href="#projektek" data-i18n="nav.projektek">Projektek</a></li>
+          <li><a href="#kapcsolat" data-i18n="nav.kapcsolat">Kapcsolat</a></li>
+        </ul>
+        <div class="lang-switch">
+          <button type="button" class="lang-btn active" data-lang="hu" aria-label="Magyar nyelv">🇭🇺</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">🇬🇧</button>
+        </div>
+        <button class="nav-toggle" data-i18n-attr="aria-label:nav.menuAria" aria-label="Menü">☰</button>
+      </div>
     </div>
   </nav>
 
@@ -783,15 +816,15 @@
   <header class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="hero-badge">Full-stack fejlesztő @ Everest Accounting Zrt.</div>
-        <h1>Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.</h1>
-        <p class="hero-desc">
+        <div class="hero-badge" data-i18n="hero.badge">Full-stack fejlesztő @ Everest Accounting Zrt.</div>
+        <h1 data-i18n="hero.h1">Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.</h1>
+        <p class="hero-desc" data-i18n="hero.desc">
           Full-stack fejlesztő Budapestről. Modern, letisztult webalkalmazásokat építek,
           és folyamatosan hajt a kíváncsiság az új technológiák felé.
         </p>
         <div class="hero-actions">
-          <a href="#kapcsolat" class="btn btn-primary">Vedd fel velem a kapcsolatot</a>
-          <a href="#tapasztalat" class="btn btn-ghost">Nézd meg, mivel foglalkozom</a>
+          <a href="#kapcsolat" class="btn btn-primary" data-i18n="hero.btnPrimary">Vedd fel velem a kapcsolatot</a>
+          <a href="#tapasztalat" class="btn btn-ghost" data-i18n="hero.btnGhost">Nézd meg, mivel foglalkozom</a>
         </div>
       </div>
       <div class="hero-portrait">
@@ -807,21 +840,21 @@
   <!-- ============ RÓLAM ============ -->
   <section id="rolam">
     <div class="container">
-      <div class="section-label">Rólam</div>
-      <h2>Ki vagyok én?</h2>
+      <div class="section-label" data-i18n="about.label">Rólam</div>
+      <h2 data-i18n="about.h2">Ki vagyok én?</h2>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>
+          <p data-i18n="about.p1">
             2024 nyarán szereztem meg <strong>programtervező informatikus BSc</strong> diplomámat az
             ELTE-n, majd ugyanitt folytattam és <strong>2026-ban fejeztem be az MSc-t</strong>
             szoftvertechnológia specializáción.
           </p>
-          <p>
+          <p data-i18n="about.p2">
             Jelenleg <strong>full-stack fejlesztőként</strong> dolgozom az
             <strong>Everest Accounting Zrt.-nél</strong>, előtte pedig az Oracle Hungary-nél
             szereztem többéves tapasztalatot frontend fejlesztésben, agilis Scrum csapatban dolgozva.
           </p>
-          <p>
+          <p data-i18n="about.p3">
             Jól kijövök az emberekkel, jó hallgatóságnak tartom magam, és született optimista vagyok –
             igyekszem mindig a dolgok jó oldalát nézni. Érdekel a szoftvertervezés és a
             projektmenedzsment is.
@@ -832,21 +865,21 @@
             <div class="fact-icon">📍</div>
             <div>
               <h4>Budapest</h4>
-              <p>Magyarország</p>
+              <p data-i18n="about.fact1.sub">Magyarország</p>
             </div>
           </div>
           <div class="fact-card reveal">
             <div class="fact-icon">🎓</div>
             <div>
-              <h4>MSc Programtervező informatikus</h4>
-              <p>ELTE · szoftvertechnológia</p>
+              <h4 data-i18n="about.fact2.title">MSc Programtervező informatikus</h4>
+              <p data-i18n="about.fact2.sub">ELTE · szoftvertechnológia</p>
             </div>
           </div>
           <div class="fact-card reveal">
             <div class="fact-icon">⚽</div>
             <div>
-              <h4>Szabadidőmben</h4>
-              <p>Foci · edzés · egészséges életmód</p>
+              <h4 data-i18n="about.fact3.title">Szabadidőmben</h4>
+              <p data-i18n="about.fact3.sub">Foci · edzés · egészséges életmód</p>
             </div>
           </div>
         </div>
@@ -857,21 +890,21 @@
   <!-- ============ TAPASZTALAT ============ -->
   <section id="tapasztalat" style="background: var(--bg-soft); border-block: 1px solid var(--border);">
     <div class="container">
-      <div class="section-label">Karrier</div>
-      <h2>Tapasztalat</h2>
+      <div class="section-label" data-i18n="exp.label">Karrier</div>
+      <h2 data-i18n="exp.h2">Tapasztalat</h2>
       <div class="timeline">
         <div class="timeline-item reveal">
-          <span class="timeline-date">2026. január – jelenleg</span>
-          <h3>Full-stack fejlesztő</h3>
+          <span class="timeline-date" data-i18n="exp.item1.date">2026. január – jelenleg</span>
+          <h3 data-i18n="exp.item1.role">Full-stack fejlesztő</h3>
           <div class="timeline-company">Everest Accounting Zrt.</div>
           <!-- TODO: Ide írd, hogy pontosan min dolgozol az Everestnél (projektek, felelősségek). -->
-          <p>
+          <p data-i18n="exp.item1.desc">
             Full-stack fejlesztőként veszek részt a cég webes alkalmazásainak fejlesztésében.
           </p>
           <div class="tag-row">
             <!-- TODO: Cseréld a valóban használt technológiákra. -->
             <span class="tag">Full-stack</span>
-            <span class="tag">Webfejlesztés</span>
+            <span class="tag" data-i18n="exp.item1.tag2">Webfejlesztés</span>
             <span class="tag">Supabase</span>
           </div>
         </div>
@@ -880,8 +913,8 @@
           <h3>Software Engineer Intern</h3>
           <div class="timeline-company">Oracle Hungary</div>
           <ul>
-            <li>Agilis Scrum csapatban dolgoztam, ahol betekintést nyertem egy nagyvállalat működésébe és a kollaboratív fejlesztés dinamikájába.</li>
-            <li>Fő fókuszom a UI fejlesztés volt: modern technológiákkal építettem hatékony, felhasználóbarát felületeket.</li>
+            <li data-i18n="exp.item2.list1">Agilis Scrum csapatban dolgoztam, ahol betekintést nyertem egy nagyvállalat működésébe és a kollaboratív fejlesztés dinamikájába.</li>
+            <li data-i18n="exp.item2.list2">Fő fókuszom a UI fejlesztés volt: modern technológiákkal építettem hatékony, felhasználóbarát felületeket.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">Oracle JET / Preact</span>
@@ -895,22 +928,22 @@
 
       <div style="height: 60px;"></div>
 
-      <div class="section-label">Tanulmányok</div>
-      <h2>Oktatás</h2>
+      <div class="section-label" data-i18n="edu.label">Tanulmányok</div>
+      <h2 data-i18n="edu.h2">Oktatás</h2>
       <div class="timeline">
         <div class="timeline-item reveal">
           <span class="timeline-date">2024 – 2026</span>
-          <h3>MSc – Programtervező informatikus</h3>
+          <h3 data-i18n="edu.item1.degree">MSc – Programtervező informatikus</h3>
           <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
-          <p>Szoftvertechnológia specializáció. Fókuszban a szoftvertervezés és a projektmenedzsment.</p>
+          <p data-i18n="edu.item1.desc">Szoftvertechnológia specializáció. Fókuszban a szoftvertervezés és a projektmenedzsment.</p>
         </div>
         <div class="timeline-item reveal">
           <span class="timeline-date">2021 – 2024</span>
-          <h3>BSc – Programtervező informatikus</h3>
+          <h3 data-i18n="edu.item2.degree">BSc – Programtervező informatikus</h3>
           <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
           <ul>
-            <li>Szakdolgozat: webalkalmazás osztályközösségek tanulásszervezésének támogatására, Laravel és React keretrendszerekkel.</li>
-            <li>Csapatban fejlesztettünk C# játékot Git és Jira használatával, agilis módszertan szerint.</li>
+            <li data-i18n="edu.item2.list1">Szakdolgozat: webalkalmazás osztályközösségek tanulásszervezésének támogatására, Laravel és React keretrendszerekkel.</li>
+            <li data-i18n="edu.item2.list2">Csapatban fejlesztettünk C# játékot Git és Jira használatával, agilis módszertan szerint.</li>
           </ul>
         </div>
       </div>
@@ -920,11 +953,11 @@
   <!-- ============ SKILLEK ============ -->
   <section id="skillek">
     <div class="container">
-      <div class="section-label">Technológiák</div>
-      <h2>Amivel dolgozom</h2>
+      <div class="section-label" data-i18n="skills.label">Technológiák</div>
+      <h2 data-i18n="skills.h2">Amivel dolgozom</h2>
       <div class="skills-grid">
         <div class="skill-card reveal">
-          <h3><span class="emoji">💻</span> Programozási nyelvek</h3>
+          <h3><span class="emoji">💻</span> <span data-i18n="skills.card1.title">Programozási nyelvek</span></h3>
           <div class="tag-row">
             <span class="tag">TypeScript</span>
             <span class="tag">JavaScript</span>
@@ -937,7 +970,7 @@
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3><span class="emoji">🌐</span> Webfejlesztés</h3>
+          <h3><span class="emoji">🌐</span> <span data-i18n="skills.card2.title">Webfejlesztés</span></h3>
           <div class="tag-row">
             <span class="tag">React</span>
             <span class="tag">Node.js</span>
@@ -945,11 +978,11 @@
             <span class="tag">ASP.NET</span>
             <span class="tag">HTML5</span>
             <span class="tag">CSS3 / SCSS</span>
-            <span class="tag">Reszponzív design</span>
+            <span class="tag" data-i18n="skills.responsive">Reszponzív design</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3><span class="emoji">🗄️</span> Adatbázisok</h3>
+          <h3><span class="emoji">🗄️</span> <span data-i18n="skills.card3.title">Adatbázisok</span></h3>
           <div class="tag-row">
             <span class="tag">MySQL</span>
             <span class="tag">SQLite</span>
@@ -957,7 +990,7 @@
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3><span class="emoji">🛠️</span> Eszközök és módszertan</h3>
+          <h3><span class="emoji">🛠️</span> <span data-i18n="skills.card4.title">Eszközök és módszertan</span></h3>
           <div class="tag-row">
             <span class="tag">Git</span>
             <span class="tag">GitHub / GitLab</span>
@@ -975,14 +1008,14 @@
   <!-- ============ PROJEKTEK ============ -->
   <section id="projektek" style="background: var(--bg-soft); border-block: 1px solid var(--border);">
     <div class="container">
-      <div class="section-label">Munkáim</div>
-      <h2>Projektek</h2>
+      <div class="section-label" data-i18n="proj.label">Munkáim</div>
+      <h2 data-i18n="proj.h2">Projektek</h2>
       <div class="projects-grid">
         <div class="project-card reveal">
-          <div class="project-lock" title="A projekt jelenleg nem érhető el nyilvánosan">🔒</div>
+          <div class="project-lock" data-i18n-attr="title:proj.lockTitle" title="A projekt jelenleg nem érhető el nyilvánosan">🔒</div>
           <div class="project-icon">🎓</div>
-          <h3>Tanulásszervező webalkalmazás</h3>
-          <p>
+          <h3 data-i18n="proj.card1.title">Tanulásszervező webalkalmazás</h3>
+          <p data-i18n="proj.card1.desc">
             Szakdolgozati projekt: webalkalmazás, amely osztályközösségeket segít a tanulási
             tevékenységek megszervezésében. Laravel backend és React frontend integrációjával épült.
           </p>
@@ -995,21 +1028,21 @@
         <a href="https://onderpapir.hu" target="_blank" rel="noopener" class="project-card reveal" style="text-decoration: none; color: inherit;">
           <div class="project-icon">📄</div>
           <h3>Onder Papírbolt</h3>
-          <p>
+          <p data-i18n="proj.card2.desc">
             Bemutatkozó weboldal egy tiszaújvárosi papírboltnak.
           </p>
           <div class="tag-row">
-            <span class="tag">Weboldal</span>
+            <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
           </div>
         </a>
         <a href="https://kovacscar.pages.dev/" target="_blank" rel="noopener" class="project-card reveal" style="text-decoration: none; color: inherit;">
           <div class="project-icon">🚗</div>
           <h3>Kovácscar Autókozmetika</h3>
-          <p>
+          <p data-i18n="proj.card3.desc">
             Weboldal egy prémium autókozmetikai vállalkozásnak: külső-belső tisztítás, kerámia bevonat és waxolás bemutatása.
           </p>
           <div class="tag-row">
-            <span class="tag">Weboldal</span>
+            <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
           </div>
         </a>
       </div>
@@ -1052,9 +1085,9 @@
   <!-- ============ KAPCSOLAT ============ -->
   <section id="kapcsolat" style="background: var(--bg-soft); border-top: 1px solid var(--border);">
     <div class="container contact-wrap">
-      <div class="section-label">Kapcsolat</div>
-      <h2>Dolgozzunk együtt!</h2>
-      <p>
+      <div class="section-label" data-i18n="contact.label">Kapcsolat</div>
+      <h2 data-i18n="contact.h2">Dolgozzunk együtt!</h2>
+      <p data-i18n="contact.p">
         Ha kérdésed van, projektötleted, vagy csak beszélgetnél egy jót technológiáról,
         keress bátran bármelyik csatornán.
       </p>
@@ -1066,13 +1099,13 @@
         </a>
         <a href="tel:+36703293866" class="contact-card reveal">
           <div class="icon">📞</div>
-          <h4>Telefon</h4>
+          <h4 data-i18n="contact.phone">Telefon</h4>
           <p>+36 70 329 3866</p>
         </a>
         <div class="contact-card reveal">
           <div class="icon">📍</div>
-          <h4>Helyszín</h4>
-          <p>Budapest, Magyarország</p>
+          <h4 data-i18n="contact.location">Helyszín</h4>
+          <p data-i18n="contact.locationValue">Budapest, Magyarország</p>
         </div>
       </div>
       <div class="socials">
@@ -1089,11 +1122,127 @@
   <!-- ============ LÁBLÉC ============ -->
   <footer>
     <div class="container">
-      © <span id="year"></span> Zsóri Ádám · Minden jog fenntartva
+      © <span id="year"></span> Zsóri Ádám · <span data-i18n="footer.rights">Minden jog fenntartva</span>
     </div>
   </footer>
 
   <script>
+    // ---------- Fordítások / Translations ----------
+    const translations = {
+      'nav.rolam': { hu: 'Rólam', en: 'About' },
+      'nav.tapasztalat': { hu: 'Tapasztalat', en: 'Experience' },
+      'nav.skillek': { hu: 'Skillek', en: 'Skills' },
+      'nav.projektek': { hu: 'Projektek', en: 'Projects' },
+      'nav.kapcsolat': { hu: 'Kapcsolat', en: 'Contact' },
+      'nav.menuAria': { hu: 'Menü', en: 'Menu' },
+
+      'hero.badge': { hu: 'Full-stack fejlesztő @ Everest Accounting Zrt.', en: 'Full-stack Developer @ Everest Accounting Zrt.' },
+      'hero.h1': { hu: 'Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.', en: 'Hi, I\'m <span class="gradient-text">Zsóri Ádám</span>.' },
+      'hero.desc': { hu: 'Full-stack fejlesztő Budapestről. Modern, letisztult webalkalmazásokat építek, és folyamatosan hajt a kíváncsiság az új technológiák felé.', en: 'Full-stack developer based in Budapest. I build modern, polished web applications, driven by constant curiosity for new technologies.' },
+      'hero.btnPrimary': { hu: 'Vedd fel velem a kapcsolatot', en: 'Get in touch' },
+      'hero.btnGhost': { hu: 'Nézd meg, mivel foglalkozom', en: 'See what I do' },
+
+      'about.label': { hu: 'Rólam', en: 'About' },
+      'about.h2': { hu: 'Ki vagyok én?', en: 'Who am I?' },
+      'about.p1': { hu: '2024 nyarán szereztem meg <strong>programtervező informatikus BSc</strong> diplomámat az ELTE-n, majd ugyanitt folytattam és <strong>2026-ban fejeztem be az MSc-t</strong> szoftvertechnológia specializáción.', en: 'I earned my <strong>BSc in Computer Science</strong> from ELTE in the summer of 2024, then continued there and <strong>completed my MSc in 2026</strong>, specializing in software technology.' },
+      'about.p2': { hu: 'Jelenleg <strong>full-stack fejlesztőként</strong> dolgozom az <strong>Everest Accounting Zrt.-nél</strong>, előtte pedig az Oracle Hungary-nél szereztem többéves tapasztalatot frontend fejlesztésben, agilis Scrum csapatban dolgozva.', en: 'I currently work as a <strong>full-stack developer</strong> at <strong>Everest Accounting Zrt.</strong>, and before that I gained several years of frontend development experience at Oracle Hungary, working in an agile Scrum team.' },
+      'about.p3': { hu: 'Jól kijövök az emberekkel, jó hallgatóságnak tartom magam, és született optimista vagyok – igyekszem mindig a dolgok jó oldalát nézni. Érdekel a szoftvertervezés és a projektmenedzsment is.', en: 'I get along well with people, I consider myself a good listener, and I\'m a born optimist – I always try to look on the bright side of things. I\'m also interested in software design and project management.' },
+      'about.fact1.sub': { hu: 'Magyarország', en: 'Hungary' },
+      'about.fact2.title': { hu: 'MSc Programtervező informatikus', en: 'MSc in Computer Science' },
+      'about.fact2.sub': { hu: 'ELTE · szoftvertechnológia', en: 'ELTE · Software Technology' },
+      'about.fact3.title': { hu: 'Szabadidőmben', en: 'In my free time' },
+      'about.fact3.sub': { hu: 'Foci · edzés · egészséges életmód', en: 'Football · working out · a healthy lifestyle' },
+
+      'exp.label': { hu: 'Karrier', en: 'Career' },
+      'exp.h2': { hu: 'Tapasztalat', en: 'Experience' },
+      'exp.item1.date': { hu: '2026. január – jelenleg', en: 'January 2026 – present' },
+      'exp.item1.role': { hu: 'Full-stack fejlesztő', en: 'Full-stack Developer' },
+      'exp.item1.desc': { hu: 'Full-stack fejlesztőként veszek részt a cég webes alkalmazásainak fejlesztésében.', en: 'I work as a full-stack developer, contributing to the development of the company\'s web applications.' },
+      'exp.item1.tag2': { hu: 'Webfejlesztés', en: 'Web development' },
+      'exp.item2.list1': { hu: 'Agilis Scrum csapatban dolgoztam, ahol betekintést nyertem egy nagyvállalat működésébe és a kollaboratív fejlesztés dinamikájába.', en: 'I worked in an agile Scrum team, gaining insight into how a large enterprise operates and the dynamics of collaborative development.' },
+      'exp.item2.list2': { hu: 'Fő fókuszom a UI fejlesztés volt: modern technológiákkal építettem hatékony, felhasználóbarát felületeket.', en: 'My main focus was UI development: I built efficient, user-friendly interfaces using modern technologies.' },
+
+      'edu.label': { hu: 'Tanulmányok', en: 'Studies' },
+      'edu.h2': { hu: 'Oktatás', en: 'Education' },
+      'edu.item1.degree': { hu: 'MSc – Programtervező informatikus', en: 'MSc – Computer Science' },
+      'edu.item1.desc': { hu: 'Szoftvertechnológia specializáció. Fókuszban a szoftvertervezés és a projektmenedzsment.', en: 'Software Technology specialization, focused on software design and project management.' },
+      'edu.item2.degree': { hu: 'BSc – Programtervező informatikus', en: 'BSc – Computer Science' },
+      'edu.item2.list1': { hu: 'Szakdolgozat: webalkalmazás osztályközösségek tanulásszervezésének támogatására, Laravel és React keretrendszerekkel.', en: 'Thesis: a web application supporting the organization of learning activities for school classes, built with Laravel and React.' },
+      'edu.item2.list2': { hu: 'Csapatban fejlesztettünk C# játékot Git és Jira használatával, agilis módszertan szerint.', en: 'Developed a C# game as part of a team using Git and Jira, following agile methodology.' },
+
+      'skills.label': { hu: 'Technológiák', en: 'Technologies' },
+      'skills.h2': { hu: 'Amivel dolgozom', en: 'What I work with' },
+      'skills.card1.title': { hu: 'Programozási nyelvek', en: 'Programming languages' },
+      'skills.card2.title': { hu: 'Webfejlesztés', en: 'Web development' },
+      'skills.card3.title': { hu: 'Adatbázisok', en: 'Databases' },
+      'skills.card4.title': { hu: 'Eszközök és módszertan', en: 'Tools & methodology' },
+      'skills.responsive': { hu: 'Reszponzív design', en: 'Responsive design' },
+
+      'proj.label': { hu: 'Munkáim', en: 'My work' },
+      'proj.h2': { hu: 'Projektek', en: 'Projects' },
+      'proj.lockTitle': { hu: 'A projekt jelenleg nem érhető el nyilvánosan', en: 'This project isn\'t publicly available right now' },
+      'proj.card1.title': { hu: 'Tanulásszervező webalkalmazás', en: 'Class Learning-Organizer Web App' },
+      'proj.card1.desc': { hu: 'Szakdolgozati projekt: webalkalmazás, amely osztályközösségeket segít a tanulási tevékenységek megszervezésében. Laravel backend és React frontend integrációjával épült.', en: 'Thesis project: a web application that helps school classes organize their learning activities. Built with a Laravel backend and React frontend.' },
+      'proj.card2.desc': { hu: 'Bemutatkozó weboldal egy tiszaújvárosi papírboltnak.', en: 'Landing page website for a stationery shop in Tiszaújváros.' },
+      'proj.card3.desc': { hu: 'Weboldal egy prémium autókozmetikai vállalkozásnak: külső-belső tisztítás, kerámia bevonat és waxolás bemutatása.', en: 'Website for a premium car detailing business, showcasing interior/exterior cleaning, ceramic coating, and waxing.' },
+      'proj.websiteTag': { hu: 'Weboldal', en: 'Website' },
+
+      'contact.label': { hu: 'Kapcsolat', en: 'Contact' },
+      'contact.h2': { hu: 'Dolgozzunk együtt!', en: 'Let\'s work together!' },
+      'contact.p': { hu: 'Ha kérdésed van, projektötleted, vagy csak beszélgetnél egy jót technológiáról, keress bátran bármelyik csatornán.', en: 'If you have a question, a project idea, or just want to talk tech, feel free to reach out on any channel.' },
+      'contact.phone': { hu: 'Telefon', en: 'Phone' },
+      'contact.location': { hu: 'Helyszín', en: 'Location' },
+      'contact.locationValue': { hu: 'Budapest, Magyarország', en: 'Budapest, Hungary' },
+
+      'footer.rights': { hu: 'Minden jog fenntartva', en: 'All rights reserved' },
+    };
+
+    const pageTitles = {
+      hu: 'Zsóri Ádám — Full-stack fejlesztő',
+      en: 'Zsóri Ádám — Full-stack Developer',
+    };
+    const pageDescriptions = {
+      hu: 'Zsóri Ádám full-stack fejlesztő személyes oldala – tapasztalat, projektek és webfejlesztési szolgáltatások.',
+      en: 'Personal site of Zsóri Ádám, full-stack developer – experience, projects and web development services.',
+    };
+
+    function setLanguage(lang) {
+      if (lang !== 'en') lang = 'hu';
+
+      document.documentElement.lang = lang;
+      document.title = pageTitles[lang];
+
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) descMeta.setAttribute('content', pageDescriptions[lang]);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const entry = translations[el.getAttribute('data-i18n')];
+        if (entry) el.innerHTML = entry[lang];
+      });
+
+      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        el.getAttribute('data-i18n-attr').split('|').forEach(pair => {
+          const [attr, key] = pair.split(':');
+          const entry = translations[key];
+          if (entry) el.setAttribute(attr, entry[lang]);
+        });
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    let initialLang = 'hu';
+    try { initialLang = localStorage.getItem('lang') || 'hu'; } catch (e) {}
+    setLanguage(initialLang);
+
     // Aktuális év a láblécben
     document.getElementById('year').textContent = new Date().getFullYear();
 
