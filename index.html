@@ -798,7 +798,7 @@
   <!-- ============ NAVIGÁCIÓ ============ -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="logo">Zsóri <span>Ádám</span></a>
+      <a href="#" class="logo" data-i18n="brand.name">Zsóri <span>Ádám</span></a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#rolam" data-i18n="nav.rolam">Rólam</a></li>
@@ -848,7 +848,7 @@
       <div class="hero-portrait">
         <div class="portrait-frame">
           <div class="portrait-inner">
-            <img src="profile.jpg" alt="Zsóri Ádám" style="width:100%;height:100%;object-fit:cover;">
+            <img src="profile.jpg" alt="Zsóri Ádám" data-i18n-attr="alt:brand.namePlain" style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
       </div>
@@ -1140,13 +1140,16 @@
   <!-- ============ LÁBLÉC ============ -->
   <footer>
     <div class="container">
-      © <span id="year"></span> Zsóri Ádám · <span data-i18n="footer.rights">Minden jog fenntartva</span>
+      © <span id="year"></span> <span data-i18n="brand.name">Zsóri Ádám</span> · <span data-i18n="footer.rights">Minden jog fenntartva</span>
     </div>
   </footer>
 
   <script>
     // ---------- Fordítások / Translations ----------
     const translations = {
+      'brand.name': { hu: 'Zsóri <span>Ádám</span>', en: '<span>Ádám</span> Zsóri' },
+      'brand.namePlain': { hu: 'Zsóri Ádám', en: 'Ádám Zsóri' },
+
       'nav.rolam': { hu: 'Rólam', en: 'About' },
       'nav.tapasztalat': { hu: 'Tapasztalat', en: 'Experience' },
       'nav.skillek': { hu: 'Skillek', en: 'Skills' },
@@ -1155,7 +1158,7 @@
       'nav.menuAria': { hu: 'Menü', en: 'Menu' },
 
       'hero.badge': { hu: 'Full-stack fejlesztő @ Everest Accounting Zrt.', en: 'Full-stack Developer @ Everest Accounting Zrt.' },
-      'hero.h1': { hu: 'Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.', en: 'Hi, I\'m <span class="gradient-text">Zsóri Ádám</span>.' },
+      'hero.h1': { hu: 'Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.', en: 'Hi, I\'m <span class="gradient-text">Ádám Zsóri</span>.' },
       'hero.desc': { hu: 'Full-stack fejlesztő Budapestről. Modern, letisztult webalkalmazásokat építek, és folyamatosan hajt a kíváncsiság az új technológiák felé.', en: 'Full-stack developer based in Budapest. I build modern, polished web applications, driven by constant curiosity for new technologies.' },
       'hero.btnPrimary': { hu: 'Vedd fel velem a kapcsolatot', en: 'Get in touch' },
       'hero.btnGhost': { hu: 'Nézd meg, mivel foglalkozom', en: 'See what I do' },
@@ -1217,11 +1220,11 @@
 
     const pageTitles = {
       hu: 'Zsóri Ádám — Full-stack fejlesztő',
-      en: 'Zsóri Ádám — Full-stack Developer',
+      en: 'Ádám Zsóri — Full-stack Developer',
     };
     const pageDescriptions = {
       hu: 'Zsóri Ádám full-stack fejlesztő személyes oldala – tapasztalat, projektek és webfejlesztési szolgáltatások.',
-      en: 'Personal site of Zsóri Ádám, full-stack developer – experience, projects and web development services.',
+      en: 'Personal site of Ádám Zsóri, full-stack developer – experience, projects and web development services.',
     };
 
     function setLanguage(lang) {
