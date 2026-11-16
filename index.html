@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zsóri Ádám — Full-stack fejlesztő</title>
   <meta name="description" content="Zsóri Ádám full-stack fejlesztő személyes oldala – tapasztalat, projektek és webfejlesztési szolgáltatások.">
+  <meta name="theme-color" content="#0b0f1a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.5' stop-color='%23818cf8'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230b0f1a'/%3E%3Cpath d='M18 20h28L20 44h28' fill='none' stroke='url(%23g)' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://me.zsoriadam10.workers.dev/">
@@ -19,6 +21,8 @@
   <meta name="twitter:description" content="Full-stack fejlesztő Budapestről. Modern, letisztult webalkalmazásokat építek.">
   <meta name="twitter:image" content="https://me.zsoriadam10.workers.dev/og-image.jpg">
 
+  <script>document.documentElement.classList.add('js');</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,18 +33,25 @@
       --card: #151d2e;
       --card-hover: #1a2338;
       --border: rgba(148, 163, 184, 0.12);
+      --border-strong: rgba(148, 163, 184, 0.24);
       --text: #e5eaf3;
       --muted: #94a3b8;
       --accent: #38bdf8;
       --accent-2: #818cf8;
+      --accent-3: #c084fc;
       --gradient: linear-gradient(120deg, #38bdf8, #818cf8, #c084fc);
       --radius: 18px;
       --font-head: 'Sora', sans-serif;
       --font-body: 'IBM Plex Sans', sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-color: #2a3550 var(--bg);
+    }
 
     body {
       background: var(--bg);
@@ -48,20 +59,76 @@
       font-family: var(--font-body);
       line-height: 1.7;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    ::selection { background: rgba(56, 189, 248, 0.3); }
+    ::selection { background: rgba(56, 189, 248, 0.3); color: #fff; }
 
-    /* ---------- Háttér dekoráció ---------- */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .icon {
+      width: 1.25em;
+      height: 1.25em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 300;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #0b0f1a;
+      font-weight: 600;
+      text-decoration: none;
+      transform: translateY(-200%);
+    }
+    .skip-link:focus { transform: none; }
+
+    /* ---------- Háttér: lassan sodródó fények ---------- */
     .bg-glow {
       position: fixed;
       inset: 0;
       z-index: -1;
-      background:
-        radial-gradient(600px circle at 15% 10%, rgba(56, 189, 248, 0.10), transparent 60%),
-        radial-gradient(700px circle at 85% 30%, rgba(129, 140, 248, 0.10), transparent 60%),
-        radial-gradient(800px circle at 50% 95%, rgba(192, 132, 252, 0.07), transparent 60%);
+      overflow: hidden;
+      pointer-events: none;
     }
+
+    .bg-glow i {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+    }
+
+    .bg-glow i:nth-child(1) {
+      width: 900px; height: 900px; left: -260px; top: -320px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.14), transparent 62%);
+      animation: drift-a 26s ease-in-out infinite alternate;
+    }
+    .bg-glow i:nth-child(2) {
+      width: 1000px; height: 1000px; right: -340px; top: 4%;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.14), transparent 62%);
+      animation: drift-b 32s ease-in-out infinite alternate;
+    }
+    .bg-glow i:nth-child(3) {
+      width: 1100px; height: 1100px; left: 18%; bottom: -520px;
+      background: radial-gradient(circle, rgba(192, 132, 252, 0.10), transparent 62%);
+      animation: drift-a 38s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift-a { to { transform: translate3d(140px, 90px, 0) scale(1.12); } }
+    @keyframes drift-b { to { transform: translate3d(-160px, 120px, 0) scale(0.92); } }
 
     .container {
       max-width: 1080px;
@@ -77,14 +144,32 @@
       right: 0;
       z-index: 100;
       backdrop-filter: blur(14px);
-      background: rgba(11, 15, 26, 0.75);
-      border-bottom: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(11, 15, 26, 0.6);
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(11, 15, 26, 0.86);
+      border-bottom-color: var(--border);
+    }
+
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background: var(--gradient);
+      transform: scaleX(var(--scroll, 0));
+      transform-origin: left;
     }
 
     .nav-inner {
       max-width: 1080px;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -98,12 +183,7 @@
       color: var(--text);
     }
 
-    .logo span {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .logo span { color: var(--accent); }
 
     .nav-right {
       display: flex;
@@ -113,19 +193,39 @@
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 6px;
       list-style: none;
     }
 
     .nav-links a {
+      position: relative;
+      display: block;
+      padding: 6px 12px;
       color: var(--muted);
       text-decoration: none;
       font-size: 0.92rem;
       font-weight: 500;
+      border-radius: 8px;
       transition: color 0.2s;
     }
 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease);
+    }
+
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { transform: scaleX(1); }
 
     .lang-switch {
       display: flex;
@@ -143,12 +243,12 @@
       line-height: 0;
       cursor: pointer;
       opacity: 0.45;
-      transition: opacity 0.2s, border-color 0.2s;
+      transition: opacity 0.2s, border-color 0.2s, transform 0.2s var(--ease);
     }
 
     .lang-btn svg { display: block; border-radius: 2px; }
 
-    .lang-btn:hover { opacity: 0.8; }
+    .lang-btn:hover { opacity: 0.8; transform: translateY(-1px); }
     .lang-btn.active { opacity: 1; border-color: var(--accent); }
 
     .nav-toggle {
@@ -156,21 +256,43 @@
       background: none;
       border: none;
       color: var(--text);
-      font-size: 1.5rem;
       cursor: pointer;
+      padding: 6px;
+      line-height: 0;
     }
+
+    .nav-toggle .icon { width: 26px; height: 26px; }
+    .nav-toggle path { transition: transform 0.3s var(--ease), opacity 0.2s; transform-origin: 12px 12px; }
+    .nav-toggle[aria-expanded="true"] path:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] path:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] path:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
     /* ---------- Hero ---------- */
     .hero {
+      position: relative;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       align-items: center;
-      padding: 120px 0 80px;
+      padding: 130px 0 90px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1.4px);
+      background-size: 30px 30px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 62% 45%, #000, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 60% at 62% 45%, #000, transparent 75%);
+      pointer-events: none;
     }
 
     .hero-grid {
+      position: relative;
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.25fr 1fr;
       gap: 48px;
       align-items: center;
     }
@@ -178,7 +300,7 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 6px 14px;
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -186,7 +308,7 @@
       color: var(--accent);
       font-size: 0.85rem;
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .hero-badge::before {
@@ -195,28 +317,41 @@
       height: 8px;
       border-radius: 50%;
       background: #34d399;
+      animation: pulse 2.4s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+      70%, 100% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
     }
 
     h1 {
       font-family: var(--font-head);
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-size: clamp(2.6rem, 6.6vw, 4.75rem);
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
     }
 
-    h1 .gradient-text {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    h1 .line {
+      display: block;
+      overflow: hidden;
+      padding: 0.16em 0.06em 0.1em 0;
+      margin-top: -0.16em;
+    }
+
+    h1 .line > span { display: inline-block; }
+
+    h1 .name {
+      background: var(--gradient) no-repeat 0 96% / 100% 0.11em;
+      padding-bottom: 0.04em;
     }
 
     .hero-desc {
       color: var(--muted);
-      font-size: 1.1rem;
-      max-width: 540px;
+      font-size: 1.12rem;
+      max-width: 520px;
       margin-bottom: 36px;
     }
 
@@ -229,50 +364,65 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
+      gap: 10px;
+      padding: 13px 26px;
       border-radius: 12px;
       font-family: var(--font-head);
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s, background 0.25s, border-color 0.25s;
       cursor: pointer;
       border: none;
     }
 
+    .btn .icon { transition: transform 0.3s var(--ease); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+
     .btn-primary {
       background: var(--gradient);
+      background-size: 180% 100%;
       color: #0b0f1a;
       box-shadow: 0 8px 30px rgba(56, 189, 248, 0.25);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s, background-position 0.6s var(--ease);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
+      background-position: 100% 0;
       box-shadow: 0 12px 40px rgba(56, 189, 248, 0.35);
     }
+
+    .btn-primary:hover .icon { transform: translateX(4px); }
 
     .btn-ghost {
       background: transparent;
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
     }
 
     .btn-ghost:hover {
       background: var(--card);
+      border-color: rgba(56, 189, 248, 0.4);
       transform: translateY(-2px);
     }
 
-    /* Hero portré */
+    .btn-ghost:hover .icon { transform: translateY(3px); }
+
+    /* Hero portré + keringő technológiák */
     .hero-portrait {
       display: flex;
       justify-content: center;
     }
 
     .portrait-frame {
+      --size: min(300px, 62vw);
+      --gap: 46px;
+      --r: calc(var(--size) / 2 + var(--gap));
       position: relative;
-      width: min(300px, 70vw);
+      width: var(--size);
       aspect-ratio: 1;
+      margin: var(--gap);
     }
 
     .portrait-frame::before {
@@ -280,129 +430,298 @@
       position: absolute;
       inset: -3px;
       border-radius: 50%;
-      background: var(--gradient);
+      background: conic-gradient(#38bdf8, #818cf8, #c084fc, #38bdf8);
       animation: spin 8s linear infinite;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .portrait-inner {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       background: var(--card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
       border: 6px solid var(--bg);
     }
 
-    /* Ha lesz fotó: tedd a mappába profile.jpg néven, és cseréld a
-       .portrait-monogram div-et erre:
-       <img src="profile.jpg" alt="Zsóri Ádám" style="width:100%;height:100%;object-fit:cover;"> */
-    .portrait-monogram {
-      font-family: var(--font-head);
-      font-size: 4.5rem;
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .portrait-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 22%;
+      transform: scale(1.12);
+      transition: transform 0.9s var(--ease);
     }
 
-    /* ---------- Szekciók ---------- */
-    section { padding: 90px 0; }
+    .portrait-frame:hover .portrait-inner img { transform: scale(1.2); }
 
-    .section-label {
+    .orbit {
+      position: absolute;
+      inset: calc(var(--gap) * -1);
+      border-radius: 50%;
+      border: 1px dashed rgba(148, 163, 184, 0.22);
+      animation: spin 44s linear infinite;
+    }
+
+    .orbit-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform: rotate(var(--a)) translateX(var(--r));
+    }
+
+    .orbit-chip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      white-space: nowrap;
       font-family: var(--font-head);
-      color: var(--accent);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 12px;
+      color: var(--text);
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      padding: 5px 13px;
+      border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+      transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
+      animation: orbit-upright 44s linear infinite;
+    }
+
+    @keyframes orbit-upright {
+      to { transform: translate(-50%, -50%) rotate(calc(var(--a) * -1 - 360deg)); }
+    }
+
+    /* Hero belépő – csak az első betöltéskor fut le */
+    @keyframes rise { from { transform: translateY(110%); } }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } }
+    @keyframes underline-in { from { background-size: 0% 0.11em; } }
+    @keyframes portrait-in { from { opacity: 0; transform: scale(0.82); filter: blur(12px); } }
+    @keyframes fade-in { from { opacity: 0; } }
+
+    html:not(.hero-done) .hero-badge { animation: fade-up 0.7s var(--ease) 0.05s both; }
+    html:not(.hero-done) h1 .line > span { animation: rise 0.95s var(--ease) both; }
+    html:not(.hero-done) h1 .line:nth-child(1) > span { animation-delay: 0.12s; }
+    html:not(.hero-done) h1 .line:nth-child(2) > span { animation-delay: 0.22s; }
+    html:not(.hero-done) h1 .line:nth-child(3) > span { animation-delay: 0.32s; }
+    html:not(.hero-done) h1 .name { animation: rise 0.95s var(--ease) 0.22s both, underline-in 0.9s var(--ease) 0.95s both; }
+    html:not(.hero-done) .hero-desc { animation: fade-up 0.8s var(--ease) 0.5s both; }
+    html:not(.hero-done) .hero-actions { animation: fade-up 0.8s var(--ease) 0.62s both; }
+    html:not(.hero-done) .portrait-frame { animation: portrait-in 1.1s var(--ease) 0.3s both; }
+    html:not(.hero-done) .orbit-item { animation: fade-in 0.8s ease calc(1s + var(--n) * 0.12s) both; }
+
+    /* ---------- Technológia-szalag ---------- */
+    .marquee {
+      border-block: 1px solid var(--border);
+      background: rgba(17, 24, 39, 0.6);
+      overflow: hidden;
+      padding: 18px 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 46s linear infinite;
+    }
+
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+
+    .marquee-group li {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--muted);
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .marquee-group li:hover { color: var(--text); }
+
+    .marquee-group li::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      margin: 0 26px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      opacity: 0.6;
+    }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ---------- Szekciók ---------- */
+    section { padding: 100px 0; scroll-margin-top: 60px; }
+
+    .section-alt {
+      background: var(--bg-soft);
+      border-block: 1px solid var(--border);
     }
 
     h2 {
+      position: relative;
       font-family: var(--font-head);
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-size: clamp(1.9rem, 4.2vw, 2.75rem);
       font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 40px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      padding-bottom: 18px;
+      margin-bottom: 44px;
+      text-wrap: balance;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 64px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--gradient);
+      transform-origin: left;
+      transition: transform 0.9s var(--ease) 0.15s;
+    }
+
+    .js h2 { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .js h2::after { transform: scaleX(0); }
+    .js h2.in { opacity: 1; transform: none; }
+    .js h2.in::after { transform: scaleX(1); }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 620px;
+      margin: -20px 0 44px;
+      font-size: 1.02rem;
     }
 
     /* ---------- Rólam ---------- */
     .about-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
-      gap: 40px;
+      gap: 48px;
+      align-items: start;
     }
 
     .about-text p {
       color: var(--muted);
       margin-bottom: 18px;
-      font-size: 1.02rem;
+      font-size: 1.04rem;
+      max-width: 62ch;
     }
 
-    .about-text strong { color: var(--text); }
+    .about-text strong { color: var(--text); font-weight: 600; }
 
-    .about-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .fact-card {
+    .fact-list {
+      list-style: none;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px 24px;
+      padding: 6px 24px;
+    }
+
+    .fact {
       display: flex;
       align-items: center;
       gap: 16px;
+      padding: 18px 0;
     }
 
+    .fact + .fact { border-top: 1px solid var(--border); }
+
     .fact-icon {
-      font-size: 1.5rem;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--accent);
       background: rgba(56, 189, 248, 0.1);
       border-radius: 12px;
       flex-shrink: 0;
+      transition: transform 0.4s var(--ease), background 0.3s;
     }
 
-    .fact-card h4 {
+    .fact:hover .fact-icon { transform: rotate(-8deg) scale(1.08); background: rgba(56, 189, 248, 0.18); }
+
+    .fact h3 {
       font-family: var(--font-head);
       font-size: 0.95rem;
       font-weight: 600;
+      line-height: 1.4;
     }
 
-    .fact-card p {
+    .fact p {
       color: var(--muted);
       font-size: 0.88rem;
     }
 
-    /* ---------- Idővonal (tapasztalat + tanulmányok) ---------- */
-    .timeline {
-      position: relative;
-      padding-left: 32px;
+    .strengths {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 56px;
+      border-top: 1px solid var(--border);
     }
 
-    .timeline::before {
+    .strengths li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 20px 0;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .strengths li:first-child { padding-left: 0; }
+    .strengths li + li { border-left: 1px solid var(--border); }
+    .strengths .icon { color: var(--accent-2); width: 22px; height: 22px; }
+
+    /* ---------- Idővonal ---------- */
+    .career-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 34px;
+    }
+
+    .timeline::before,
+    .timeline::after {
       content: '';
       position: absolute;
       left: 7px;
       top: 8px;
       bottom: 8px;
       width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--accent-2), transparent);
+      border-radius: 2px;
     }
+
+    .timeline::before { background: var(--border-strong); }
+
+    .timeline::after {
+      background: linear-gradient(to bottom, var(--accent), var(--accent-2), var(--accent-3));
+      transform: scaleY(var(--p, 1));
+      transform-origin: top;
+    }
+
+    .js .timeline { --p: 0; }
 
     .timeline-item {
       position: relative;
@@ -414,13 +733,21 @@
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -32px;
+      left: -34px;
       top: 8px;
+      z-index: 1;
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: var(--bg);
+      background: var(--accent);
       border: 3px solid var(--accent);
+      transition: background 0.4s, border-color 0.4s, transform 0.5s var(--ease);
+    }
+
+    .js .timeline-item:not(.reached)::before {
+      background: var(--bg-soft);
+      border-color: #334155;
+      transform: scale(0.8);
     }
 
     .timeline-date {
@@ -434,12 +761,14 @@
       padding: 4px 12px;
       border-radius: 999px;
       margin-bottom: 12px;
+      font-variant-numeric: tabular-nums;
     }
 
     .timeline-item h3 {
       font-family: var(--font-head);
       font-size: 1.25rem;
       font-weight: 700;
+      line-height: 1.35;
       margin-bottom: 4px;
     }
 
@@ -467,10 +796,14 @@
     }
 
     .timeline-item ul li::before {
-      content: '▹';
+      content: '';
       position: absolute;
-      left: 0;
-      color: var(--accent);
+      left: 2px;
+      top: 0.72em;
+      width: 8px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--accent);
     }
 
     .tag-row {
@@ -488,44 +821,61 @@
       border: 1px solid var(--border);
       padding: 4px 12px;
       border-radius: 999px;
+      transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease);
     }
+
+    .section-alt .tag { background: var(--bg); }
 
     /* ---------- Skillek ---------- */
-    .skills-grid {
+    .skill-rows { border-top: 1px solid var(--border); }
+
+    .skill-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
     }
 
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.35);
-    }
-
-    .skill-card h3 {
+    .skill-row h3 {
       font-family: var(--font-head);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 700;
-      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
 
-    .skill-card h3 .emoji { font-size: 1.3rem; }
+    .skill-row h3 .icon {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+      transition: transform 0.4s var(--ease);
+    }
+
+    .skill-row:hover h3 .icon { transform: scale(1.2) rotate(-6deg); }
+
+    .skill-row .tag-row { margin-top: 0; gap: 10px; }
+
+    .skill-row .tag {
+      font-size: 0.9rem;
+      padding: 6px 16px;
+      color: var(--text);
+      background: var(--card);
+    }
+
+    .skill-row .tag:hover {
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.45);
+      transform: translateY(-2px);
+    }
 
     /* ---------- Projektek ---------- */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 24px;
     }
 
@@ -534,44 +884,144 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 32px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s, border-color 0.25s;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.4s var(--ease), border-color 0.3s, box-shadow 0.4s;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(129, 140, 248, 0.4);
+      transform: translateY(-6px);
+      border-color: rgba(129, 140, 248, 0.45);
+      box-shadow: 0 22px 44px rgba(2, 6, 23, 0.5);
     }
 
-    .project-lock {
+    /* kurzort követő fény */
+    .spot::after {
+      content: '';
       position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 32px;
-      height: 32px;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(129, 140, 248, 0.16), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .spot:hover::after { opacity: 1; }
+
+    .project-cover {
+      position: relative;
+      height: 168px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--tint) 26%, transparent), transparent 70%),
+        var(--bg);
+    }
+
+    .project-card.c1 { --tint: #38bdf8; }
+    .project-card.c2 { --tint: #818cf8; }
+    .project-card.c3 { --tint: #c084fc; }
+
+    .browser-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      background: rgba(148, 163, 184, 0.1);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      cursor: help;
+      gap: 6px;
+      padding: 11px 14px;
+      background: rgba(11, 15, 26, 0.55);
+      border-bottom: 1px solid var(--border);
     }
 
-    .project-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
+    .browser-bar i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #334155;
+    }
+
+    .browser-bar span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      padding: 1px 12px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .browser-bar span .icon { width: 12px; height: 12px; }
+
+    .project-cover > .icon {
+      position: absolute;
+      right: 22px;
+      bottom: -18px;
+      width: 120px;
+      height: 120px;
+      stroke-width: 1;
+      color: var(--tint);
+      opacity: 0.55;
+      transition: transform 0.7s var(--ease), opacity 0.4s;
+    }
+
+    .project-card:hover .project-cover > .icon {
+      transform: translateY(-12px) rotate(-6deg) scale(1.06);
+      opacity: 0.9;
+    }
+
+    .cover-lines {
+      position: absolute;
+      left: 22px;
+      top: 62px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .cover-lines b {
+      display: block;
+      height: 8px;
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--tint) 30%, #1e293b);
+      transform-origin: left;
+      transition: transform 0.6s var(--ease);
+    }
+
+    .cover-lines b:nth-child(1) { width: 120px; height: 12px; background: color-mix(in srgb, var(--tint) 65%, #1e293b); }
+    .cover-lines b:nth-child(2) { width: 150px; transition-delay: 0.05s; }
+    .cover-lines b:nth-child(3) { width: 96px; transition-delay: 0.1s; }
+    .project-card:hover .cover-lines b:nth-child(2) { transform: scaleX(1.12); }
+    .project-card:hover .cover-lines b:nth-child(3) { transform: scaleX(1.3); }
+
+    .project-body {
+      padding: 26px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .project-card h3 {
       font-family: var(--font-head);
       font-size: 1.2rem;
       font-weight: 700;
+      line-height: 1.35;
       margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
+
+    .project-card h3 .icon {
+      margin-top: 4px;
+      color: var(--muted);
+      transition: transform 0.35s var(--ease), color 0.25s;
+    }
+
+    a.project-card:hover h3 .icon { transform: translate(3px, -3px); color: var(--accent); }
 
     .project-card p {
       color: var(--muted);
@@ -579,18 +1029,58 @@
       flex: 1;
     }
 
-    .project-card.placeholder {
-      border-style: dashed;
-      border-color: rgba(148, 163, 184, 0.25);
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 220px;
-      background: transparent;
+    /* ---------- Folyamat ---------- */
+    .process {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      counter-reset: step;
+      position: relative;
     }
 
-    .project-card.placeholder .project-icon { opacity: 0.5; }
-    .project-card.placeholder h3 { color: var(--muted); }
+    .process::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 23px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      transform-origin: left;
+      transition: transform 1.6s var(--ease) 0.2s;
+    }
+
+    .js .process:not(.in)::before { transform: scaleX(0); }
+
+    .process li { position: relative; counter-increment: step; }
+
+    .process li::before {
+      content: counter(step);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent-2);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.05rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .process h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .process p { color: var(--muted); font-size: 0.94rem; }
 
     /* ---------- Vállalkozás ---------- */
     .business-banner {
@@ -672,49 +1162,94 @@
     /* ---------- Kapcsolat ---------- */
     .contact-wrap {
       text-align: center;
-      max-width: 640px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
+    .contact-wrap h2 { font-size: clamp(2.1rem, 5.4vw, 3.4rem); }
+    .contact-wrap h2::after { left: 50%; margin-left: -32px; }
+
     .contact-wrap > p {
       color: var(--muted);
-      margin-bottom: 40px;
+      max-width: 560px;
+      margin: 0 auto 40px;
     }
 
     .contact-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
       margin-bottom: 40px;
     }
 
+    .contact-item { position: relative; display: flex; }
+
     .contact-card {
+      flex: 1;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px 16px;
+      padding: 26px 16px;
       text-decoration: none;
       color: var(--text);
-      transition: transform 0.25s, border-color 0.25s;
+      transition: transform 0.35s var(--ease), border-color 0.25s, background 0.25s;
     }
 
-    .contact-card:hover {
+    a.contact-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.35);
+      border-color: rgba(56, 189, 248, 0.4);
+      background: var(--card-hover);
     }
 
-    .contact-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
-    .contact-card h4 {
+    .contact-card > .icon {
+      width: 26px;
+      height: 26px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      transition: transform 0.4s var(--ease);
+    }
+
+    a.contact-card:hover > .icon { transform: scale(1.15) rotate(-6deg); }
+
+    .contact-card h3 {
       font-family: var(--font-head);
       font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .contact-card p {
       color: var(--muted);
-      font-size: 0.85rem;
-      word-break: break-all;
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
     }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+    }
+
+    .copy-btn .icon { width: 16px; height: 16px; }
+    .copy-btn:hover { color: var(--accent); border-color: rgba(56, 189, 248, 0.4); }
+    .copy-btn:active { transform: scale(0.92); }
+    .copy-btn .i-check { display: none; }
+    .copy-btn.copied { color: #34d399; border-color: rgba(52, 211, 153, 0.5); }
+    .copy-btn.copied .i-copy { display: none; }
+    .copy-btn.copied .i-check { display: block; animation: pop 0.4s var(--ease); }
+
+    @keyframes pop { from { transform: scale(0.4); opacity: 0; } }
 
     .socials {
       display: flex;
@@ -733,7 +1268,7 @@
       border: 1px solid var(--border);
       color: var(--muted);
       text-decoration: none;
-      transition: all 0.25s;
+      transition: color 0.25s, border-color 0.25s, transform 0.35s var(--ease);
     }
 
     .social-link:hover {
@@ -747,28 +1282,107 @@
     /* ---------- Lábléc ---------- */
     footer {
       border-top: 1px solid var(--border);
-      padding: 32px 0;
-      text-align: center;
+      padding: 28px 0;
       color: var(--muted);
       font-size: 0.85rem;
     }
 
-    /* ---------- Scroll-reveal animáció ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
     }
+
+    .to-top .icon { transition: transform 0.3s var(--ease); }
+    .to-top:hover { color: var(--text); }
+    .to-top:hover .icon { transform: translateY(-3px); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 200;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--card-hover);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.55);
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transform: translate(-50%, 16px);
+      transition: opacity 0.25s, transform 0.4s var(--ease);
+      pointer-events: none;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* ---------- Görgetésre megjelenő elemek ---------- */
+    .js [data-reveal] {
+      opacity: 0;
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease), clip-path 1s var(--ease);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+
+    .js [data-reveal="up"] { transform: translateY(28px); }
+    .js [data-reveal="right"] { transform: translateX(36px); }
+    .js [data-reveal="focus"] { transform: scale(0.97); filter: blur(10px); }
+    .js [data-reveal="wipe"] { clip-path: inset(0 0 100% 0); transform: translateY(20px); }
+
+    .js [data-reveal].in {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      clip-path: inset(0 0 0 0);
+    }
+
+    .js .stagger > * {
+      opacity: 0;
+      transform: translateY(10px) scale(0.94);
+    }
+
+    .js .stagger.in > * {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.2s, border-color 0.2s;
+      transition-delay: calc(var(--n, 0) * 45ms), calc(var(--n, 0) * 45ms), 0s, 0s;
+    }
+
+    .js .stagger.settled > * { transition-delay: 0s; }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: 0.3s; }
 
     /* ---------- Mobil ---------- */
+    @media (max-width: 900px) {
+      .career-grid { grid-template-columns: 1fr; gap: 72px; }
+      .process { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+      .process::before { display: none; }
+      .strengths { grid-template-columns: 1fr 1fr; }
+      .strengths li { padding: 20px 0 0; }
+      .strengths li + li { border-left: none; }
+      .skill-row { grid-template-columns: 1fr; gap: 16px; }
+    }
+
     @media (max-width: 820px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      section { padding: 76px 0; }
+      .hero { padding: 104px 0 64px; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
       .hero-portrait { order: -1; }
+      .portrait-frame { --size: min(210px, 50vw); --gap: 34px; }
+      .orbit-chip { font-size: 0.7rem; padding: 4px 10px; }
       .hero-desc { margin-left: auto; margin-right: auto; }
       .hero-actions { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
@@ -776,7 +1390,6 @@
       .nav-right { gap: 12px; }
       .nav-toggle { display: block; }
       .nav-links {
-        display: none;
         position: absolute;
         top: 100%;
         left: 0;
@@ -786,21 +1399,79 @@
         background: rgba(11, 15, 26, 0.97);
         border-bottom: 1px solid var(--border);
         padding: 12px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.25s, transform 0.35s var(--ease), visibility 0s 0.35s;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { display: block; padding: 12px 24px; }
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition-delay: 0s;
+      }
+      .nav-links a { padding: 12px 24px; border-radius: 0; }
+      .nav-links a::after { left: 24px; right: auto; width: 28px; }
+    }
+
+    @media (max-width: 520px) {
+      .process { grid-template-columns: 1fr; }
+      .strengths { grid-template-columns: 1fr; }
+      .btn { width: 100%; justify-content: center; }
+      .footer-inner { justify-content: center; text-align: center; }
+    }
+
+    /* ---------- Csökkentett mozgás ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .bg-glow i, .orbit, .orbit-chip, .portrait-frame::before, .hero-badge::before { animation: none; }
+      .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 10px; }
+      .marquee-group[aria-hidden="true"] { display: none; }
+      .marquee-group { flex-wrap: wrap; justify-content: center; row-gap: 10px; }
+      .marquee { -webkit-mask-image: none; mask-image: none; }
+      html:not(.hero-done) .hero *, html:not(.hero-done) .portrait-frame { animation-duration: 0.01s !important; animation-delay: 0s !important; }
+      .js [data-reveal], .js .stagger > *, .js h2 { transform: none !important; filter: none !important; clip-path: none !important; }
+      .project-card:hover, .btn:hover, a.contact-card:hover, .social-link:hover { transform: none; }
+      ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
+  <a href="#rolam" class="skip-link" data-i18n="a11y.skip">Ugrás a tartalomra</a>
+  <div class="bg-glow" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <!-- Ikonkészlet -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="M19 15v4M17 17h4"/></symbol>
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-d" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+    <symbol id="i-arrow-u" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></symbol>
+  </svg>
 
   <!-- ============ NAVIGÁCIÓ ============ -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="logo" data-i18n="brand.name">Zsóri <span>Ádám</span></a>
       <div class="nav-right">
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
           <li><a href="#rolam" data-i18n="nav.rolam">Rólam</a></li>
           <li><a href="#tapasztalat" data-i18n="nav.tapasztalat">Tapasztalat</a></li>
           <li><a href="#skillek" data-i18n="nav.skillek">Skillek</a></li>
@@ -808,14 +1479,14 @@
           <li><a href="#kapcsolat" data-i18n="nav.kapcsolat">Kapcsolat</a></li>
         </ul>
         <div class="lang-switch">
-          <button type="button" class="lang-btn active" data-lang="hu" aria-label="Magyar nyelv">
+          <button type="button" class="lang-btn active" data-lang="hu" aria-label="Magyar nyelv" aria-pressed="true">
             <svg viewBox="0 0 30 20" width="22" height="15" aria-hidden="true">
               <rect width="30" height="20" fill="#fff"/>
               <rect width="30" height="6.67" fill="#ce2939"/>
               <rect y="13.33" width="30" height="6.67" fill="#477050"/>
             </svg>
           </button>
-          <button type="button" class="lang-btn" data-lang="en" aria-label="English">
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">
             <svg viewBox="0 0 30 20" width="22" height="15" aria-hidden="true">
               <rect width="30" height="20" fill="#00247d"/>
               <path d="M0,0 L30,20 M30,0 L0,20" stroke="#fff" stroke-width="3"/>
@@ -825,9 +1496,12 @@
             </svg>
           </button>
         </div>
-        <button class="nav-toggle" data-i18n-attr="aria-label:nav.menuAria" aria-label="Menü">☰</button>
+        <button type="button" class="nav-toggle" data-i18n-attr="aria-label:nav.menuAria" aria-label="Menü" aria-expanded="false" aria-controls="nav-links">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        </button>
       </div>
     </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
   </nav>
 
   <!-- ============ HERO ============ -->
@@ -835,33 +1509,48 @@
     <div class="container hero-grid">
       <div>
         <div class="hero-badge" data-i18n="hero.badge">Full-stack fejlesztő @ Everest Accounting Zrt.</div>
-        <h1 data-i18n="hero.h1">Szia, <span class="gradient-text">Zsóri Ádám</span> vagyok.</h1>
+        <h1 data-i18n="hero.h1"><span class="line"><span>Szia,</span></span><span class="line"><span class="name">Zsóri Ádám</span></span><span class="line"><span>vagyok.</span></span></h1>
         <p class="hero-desc" data-i18n="hero.desc">
           Full-stack fejlesztő Budapestről. Modern, letisztult webalkalmazásokat építek,
           és folyamatosan hajt a kíváncsiság az új technológiák felé.
         </p>
         <div class="hero-actions">
-          <a href="#kapcsolat" class="btn btn-primary" data-i18n="hero.btnPrimary">Vedd fel velem a kapcsolatot</a>
-          <a href="#tapasztalat" class="btn btn-ghost" data-i18n="hero.btnGhost">Nézd meg, mivel foglalkozom</a>
+          <a href="#kapcsolat" class="btn btn-primary"><span data-i18n="hero.btnPrimary">Vedd fel velem a kapcsolatot</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+          <a href="#tapasztalat" class="btn btn-ghost"><span data-i18n="hero.btnGhost">Nézd meg, mivel foglalkozom</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-d"/></svg></a>
         </div>
       </div>
       <div class="hero-portrait">
         <div class="portrait-frame">
+          <div class="orbit" aria-hidden="true">
+            <div class="orbit-item" style="--a: -50deg; --n: 0;"><span class="orbit-chip">TypeScript</span></div>
+            <div class="orbit-item" style="--a: 40deg; --n: 1;"><span class="orbit-chip">React</span></div>
+            <div class="orbit-item" style="--a: 130deg; --n: 2;"><span class="orbit-chip">Laravel</span></div>
+            <div class="orbit-item" style="--a: 220deg; --n: 3;"><span class="orbit-chip">Supabase</span></div>
+          </div>
           <div class="portrait-inner">
-            <img src="profile.jpg" alt="Zsóri Ádám" data-i18n-attr="alt:brand.namePlain" style="width:100%;height:100%;object-fit:cover;">
+            <img src="profile.jpg" alt="Zsóri Ádám" data-i18n-attr="alt:brand.namePlain" width="300" height="300" fetchpriority="high">
           </div>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- ============ TECHNOLÓGIA-SZALAG ============ -->
+  <div class="marquee" data-i18n-attr="aria-label:marquee.aria" aria-label="Technológiák, amikkel dolgozom" role="group">
+    <div class="marquee-track">
+      <ul class="marquee-group">
+        <li>TypeScript</li><li>React</li><li>Node.js</li><li>Laravel</li><li>PHP</li><li>Supabase</li><li>MySQL</li><li>ASP.NET</li><li>C#</li><li>Docker</li><li>SCSS</li><li>Git</li>
+      </ul>
+    </div>
+  </div>
+
+  <main>
   <!-- ============ RÓLAM ============ -->
   <section id="rolam">
     <div class="container">
-      <div class="section-label" data-i18n="about.label">Rólam</div>
       <h2 data-i18n="about.h2">Ki vagyok én?</h2>
       <div class="about-grid">
-        <div class="about-text reveal">
+        <div class="about-text" data-reveal="up">
           <p data-i18n="about.p1">
             2024 nyarán szereztem meg <strong>programtervező informatikus BSc</strong> diplomámat az
             ELTE-n, majd ugyanitt folytattam és <strong>2026-ban fejeztem be az MSc-t</strong>
@@ -878,91 +1567,104 @@
             projektmenedzsment is.
           </p>
         </div>
-        <div class="about-facts">
-          <div class="fact-card reveal">
-            <div class="fact-icon">📍</div>
+        <ul class="fact-list" data-reveal="right">
+          <li class="fact">
+            <div class="fact-icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></div>
             <div>
-              <h4>Budapest</h4>
+              <h3>Budapest</h3>
               <p data-i18n="about.fact1.sub">Magyarország</p>
             </div>
-          </div>
-          <div class="fact-card reveal">
-            <div class="fact-icon">🎓</div>
+          </li>
+          <li class="fact">
+            <div class="fact-icon"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg></div>
             <div>
-              <h4 data-i18n="about.fact2.title">MSc Programtervező informatikus</h4>
+              <h3 data-i18n="about.fact2.title">MSc Programtervező informatikus</h3>
               <p data-i18n="about.fact2.sub">ELTE · szoftvertechnológia</p>
             </div>
-          </div>
-          <div class="fact-card reveal">
-            <div class="fact-icon">⚽</div>
+          </li>
+          <li class="fact">
+            <div class="fact-icon"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></div>
             <div>
-              <h4 data-i18n="about.fact3.title">Szabadidőmben</h4>
+              <h3 data-i18n="about.fact4.title">Nyelvek</h3>
+              <p data-i18n="about.fact4.sub">Magyar (anyanyelv) · angol (B2)</p>
+            </div>
+          </li>
+          <li class="fact">
+            <div class="fact-icon"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></div>
+            <div>
+              <h3 data-i18n="about.fact3.title">Szabadidőmben</h3>
               <p data-i18n="about.fact3.sub">Foci · edzés · egészséges életmód</p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
+      <ul class="strengths stagger">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg><span data-i18n="strength.1">Problémamegoldás</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg><span data-i18n="strength.2">Csapatmunka</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span data-i18n="strength.3">Alkalmazkodóképesség</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span data-i18n="strength.4">Kommunikáció</span></li>
+      </ul>
     </div>
   </section>
 
-  <!-- ============ TAPASZTALAT ============ -->
-  <section id="tapasztalat" style="background: var(--bg-soft); border-block: 1px solid var(--border);">
-    <div class="container">
-      <div class="section-label" data-i18n="exp.label">Karrier</div>
-      <h2 data-i18n="exp.h2">Tapasztalat</h2>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <span class="timeline-date" data-i18n="exp.item1.date">2026. január – jelenleg</span>
-          <h3 data-i18n="exp.item1.role">Full-stack fejlesztő</h3>
-          <div class="timeline-company">Everest Accounting Zrt.</div>
-          <!-- TODO: Ide írd, hogy pontosan min dolgozol az Everestnél (projektek, felelősségek). -->
-          <p data-i18n="exp.item1.desc">
-            Full-stack fejlesztőként veszek részt a cég webes alkalmazásainak fejlesztésében.
-          </p>
-          <div class="tag-row">
-            <!-- TODO: Cseréld a valóban használt technológiákra. -->
-            <span class="tag">Full-stack</span>
-            <span class="tag" data-i18n="exp.item1.tag2">Webfejlesztés</span>
-            <span class="tag">Supabase</span>
+  <!-- ============ TAPASZTALAT + TANULMÁNYOK ============ -->
+  <section id="tapasztalat" class="section-alt">
+    <div class="container career-grid">
+      <div>
+        <h2 data-i18n="exp.h2">Tapasztalat</h2>
+        <div class="timeline">
+          <div class="timeline-item" data-reveal="up">
+            <span class="timeline-date" data-i18n="exp.item1.date">2026. január – jelenleg</span>
+            <h3 data-i18n="exp.item1.role">Full-stack fejlesztő</h3>
+            <div class="timeline-company">Everest Accounting Zrt.</div>
+            <!-- TODO: Ide írd, hogy pontosan min dolgozol az Everestnél (projektek, felelősségek). -->
+            <p data-i18n="exp.item1.desc">
+              Full-stack fejlesztőként veszek részt a cég webes alkalmazásainak fejlesztésében.
+            </p>
+            <div class="tag-row">
+              <!-- TODO: Cseréld a valóban használt technológiákra. -->
+              <span class="tag">Full-stack</span>
+              <span class="tag" data-i18n="exp.item1.tag2">Webfejlesztés</span>
+              <span class="tag">Supabase</span>
+            </div>
           </div>
-        </div>
-        <div class="timeline-item reveal">
-          <span class="timeline-date">2023 – 2025</span>
-          <h3>Software Engineer Intern</h3>
-          <div class="timeline-company">Oracle Hungary</div>
-          <ul>
-            <li data-i18n="exp.item2.list1">Agilis Scrum csapatban dolgoztam, ahol betekintést nyertem egy nagyvállalat működésébe és a kollaboratív fejlesztés dinamikájába.</li>
-            <li data-i18n="exp.item2.list2">Fő fókuszom a UI fejlesztés volt: modern technológiákkal építettem hatékony, felhasználóbarát felületeket.</li>
-          </ul>
-          <div class="tag-row">
-            <span class="tag">Oracle JET / Preact</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Webpack</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">SCSS</span>
+          <div class="timeline-item" data-reveal="up">
+            <span class="timeline-date">2023 – 2025</span>
+            <h3>Software Engineer Intern</h3>
+            <div class="timeline-company">Oracle Hungary</div>
+            <ul>
+              <li data-i18n="exp.item2.list1">Agilis Scrum csapatban dolgoztam, ahol betekintést nyertem egy nagyvállalat működésébe és a kollaboratív fejlesztés dinamikájába.</li>
+              <li data-i18n="exp.item2.list2">Fő fókuszom a UI fejlesztés volt: modern technológiákkal építettem hatékony, felhasználóbarát felületeket.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag">Oracle JET / Preact</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Webpack</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">SCSS</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div style="height: 60px;"></div>
-
-      <div class="section-label" data-i18n="edu.label">Tanulmányok</div>
-      <h2 data-i18n="edu.h2">Oktatás</h2>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <span class="timeline-date">2024 – 2026</span>
-          <h3 data-i18n="edu.item1.degree">MSc – Programtervező informatikus</h3>
-          <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
-          <p data-i18n="edu.item1.desc">Szoftvertechnológia specializáció. Fókuszban a szoftvertervezés és a projektmenedzsment.</p>
-        </div>
-        <div class="timeline-item reveal">
-          <span class="timeline-date">2021 – 2024</span>
-          <h3 data-i18n="edu.item2.degree">BSc – Programtervező informatikus</h3>
-          <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
-          <ul>
-            <li data-i18n="edu.item2.list1">Szakdolgozat: webalkalmazás osztályközösségek tanulásszervezésének támogatására, Laravel és React keretrendszerekkel.</li>
-            <li data-i18n="edu.item2.list2">Csapatban fejlesztettünk C# játékot Git és Jira használatával, agilis módszertan szerint.</li>
-          </ul>
+      <div>
+        <h2 data-i18n="edu.h2">Tanulmányok</h2>
+        <div class="timeline">
+          <div class="timeline-item" data-reveal="up">
+            <span class="timeline-date">2024 – 2026</span>
+            <h3 data-i18n="edu.item1.degree">MSc – Programtervező informatikus</h3>
+            <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
+            <p data-i18n="edu.item1.desc">Szoftvertechnológia specializáció. Fókuszban a szoftvertervezés és a projektmenedzsment.</p>
+          </div>
+          <div class="timeline-item" data-reveal="up">
+            <span class="timeline-date">2021 – 2024</span>
+            <h3 data-i18n="edu.item2.degree">BSc – Programtervező informatikus</h3>
+            <div class="timeline-company">Eötvös Loránd Tudományegyetem, Budapest</div>
+            <ul>
+              <li data-i18n="edu.item2.list1">Szakdolgozat: webalkalmazás osztályközösségek tanulásszervezésének támogatására, Laravel és React keretrendszerekkel.</li>
+              <li data-i18n="edu.item2.list2">Csapatban fejlesztettünk C# játékot Git és Jira használatával, agilis módszertan szerint.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -971,12 +1673,11 @@
   <!-- ============ SKILLEK ============ -->
   <section id="skillek">
     <div class="container">
-      <div class="section-label" data-i18n="skills.label">Technológiák</div>
       <h2 data-i18n="skills.h2">Amivel dolgozom</h2>
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <h3><span class="emoji">💻</span> <span data-i18n="skills.card1.title">Programozási nyelvek</span></h3>
-          <div class="tag-row">
+      <div class="skill-rows">
+        <div class="skill-row">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><span data-i18n="skills.card1.title">Programozási nyelvek</span></h3>
+          <div class="tag-row stagger">
             <span class="tag">TypeScript</span>
             <span class="tag">JavaScript</span>
             <span class="tag">PHP</span>
@@ -987,9 +1688,9 @@
             <span class="tag">SQL</span>
           </div>
         </div>
-        <div class="skill-card reveal">
-          <h3><span class="emoji">🌐</span> <span data-i18n="skills.card2.title">Webfejlesztés</span></h3>
-          <div class="tag-row">
+        <div class="skill-row">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span data-i18n="skills.card2.title">Webfejlesztés</span></h3>
+          <div class="tag-row stagger">
             <span class="tag">React</span>
             <span class="tag">Node.js</span>
             <span class="tag">Laravel</span>
@@ -999,17 +1700,17 @@
             <span class="tag" data-i18n="skills.responsive">Reszponzív design</span>
           </div>
         </div>
-        <div class="skill-card reveal">
-          <h3><span class="emoji">🗄️</span> <span data-i18n="skills.card3.title">Adatbázisok</span></h3>
-          <div class="tag-row">
+        <div class="skill-row">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-db"/></svg><span data-i18n="skills.card3.title">Adatbázisok</span></h3>
+          <div class="tag-row stagger">
             <span class="tag">MySQL</span>
             <span class="tag">SQLite</span>
             <span class="tag">Supabase</span>
           </div>
         </div>
-        <div class="skill-card reveal">
-          <h3><span class="emoji">🛠️</span> <span data-i18n="skills.card4.title">Eszközök és módszertan</span></h3>
-          <div class="tag-row">
+        <div class="skill-row">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg><span data-i18n="skills.card4.title">Eszközök és módszertan</span></h3>
+          <div class="tag-row stagger">
             <span class="tag">Git</span>
             <span class="tag">GitHub / GitLab</span>
             <span class="tag">Docker</span>
@@ -1024,46 +1725,88 @@
   </section>
 
   <!-- ============ PROJEKTEK ============ -->
-  <section id="projektek" style="background: var(--bg-soft); border-block: 1px solid var(--border);">
+  <section id="projektek" class="section-alt">
     <div class="container">
-      <div class="section-label" data-i18n="proj.label">Munkáim</div>
       <h2 data-i18n="proj.h2">Projektek</h2>
       <div class="projects-grid">
-        <div class="project-card reveal">
-          <div class="project-lock" data-i18n-attr="title:proj.lockTitle" title="A projekt jelenleg nem érhető el nyilvánosan">🔒</div>
-          <div class="project-icon">🎓</div>
-          <h3 data-i18n="proj.card1.title">Tanulásszervező webalkalmazás</h3>
-          <p data-i18n="proj.card1.desc">
-            Szakdolgozati projekt: webalkalmazás, amely osztályközösségeket segít a tanulási
-            tevékenységek megszervezésében. Laravel backend és React frontend integrációjával épült.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Laravel</span>
-            <span class="tag">React</span>
-            <span class="tag">MySQL</span>
+        <div class="project-card spot c1" data-reveal="wipe">
+          <div class="project-cover" aria-hidden="true">
+            <div class="browser-bar"><i></i><i></i><i></i><span><svg class="icon"><use href="#i-lock"/></svg><span data-i18n="proj.private">privát</span></span></div>
+            <div class="cover-lines"><b></b><b></b><b></b></div>
+            <svg class="icon"><use href="#i-cap"/></svg>
+          </div>
+          <div class="project-body">
+            <h3><span data-i18n="proj.card1.title">Tanulásszervező webalkalmazás</span><svg class="icon" role="img" data-i18n-attr="aria-label:proj.lockTitle" aria-label="A projekt jelenleg nem érhető el nyilvánosan"><title data-i18n="proj.lockTitle">A projekt jelenleg nem érhető el nyilvánosan</title><use href="#i-lock"/></svg></h3>
+            <p data-i18n="proj.card1.desc">
+              Szakdolgozati projekt: webalkalmazás, amely osztályközösségeket segít a tanulási
+              tevékenységek megszervezésében. Laravel backend és React frontend integrációjával épült.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Laravel</span>
+              <span class="tag">React</span>
+              <span class="tag">MySQL</span>
+            </div>
           </div>
         </div>
-        <a href="https://onderpapir.hu" target="_blank" rel="noopener" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-icon">📄</div>
-          <h3>Onder Papírbolt</h3>
-          <p data-i18n="proj.card2.desc">
-            Bemutatkozó weboldal egy tiszaújvárosi papírboltnak.
-          </p>
-          <div class="tag-row">
-            <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
+        <a href="https://onderpapir.hu" target="_blank" rel="noopener" class="project-card spot c2" data-reveal="wipe" style="--i: 1;">
+          <div class="project-cover" aria-hidden="true">
+            <div class="browser-bar"><i></i><i></i><i></i><span>onderpapir.hu</span></div>
+            <div class="cover-lines"><b></b><b></b><b></b></div>
+            <svg class="icon"><use href="#i-file"/></svg>
+          </div>
+          <div class="project-body">
+            <h3>Onder Papírbolt<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></h3>
+            <p data-i18n="proj.card2.desc">
+              Bemutatkozó weboldal egy tiszaújvárosi papírboltnak.
+            </p>
+            <div class="tag-row">
+              <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
+            </div>
           </div>
         </a>
-        <a href="https://kovacscar.pages.dev/" target="_blank" rel="noopener" class="project-card reveal" style="text-decoration: none; color: inherit;">
-          <div class="project-icon">🚗</div>
-          <h3>Kovácscar Autókozmetika</h3>
-          <p data-i18n="proj.card3.desc">
-            Weboldal egy prémium autókozmetikai vállalkozásnak: külső-belső tisztítás, kerámia bevonat és waxolás bemutatása.
-          </p>
-          <div class="tag-row">
-            <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
+        <a href="https://kovacscar.pages.dev/" target="_blank" rel="noopener" class="project-card spot c3" data-reveal="wipe" style="--i: 2;">
+          <div class="project-cover" aria-hidden="true">
+            <div class="browser-bar"><i></i><i></i><i></i><span>kovacscar.pages.dev</span></div>
+            <div class="cover-lines"><b></b><b></b><b></b></div>
+            <svg class="icon"><use href="#i-sparkles"/></svg>
+          </div>
+          <div class="project-body">
+            <h3>Kovácscar Autókozmetika<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></h3>
+            <p data-i18n="proj.card3.desc">
+              Weboldal egy prémium autókozmetikai vállalkozásnak: külső-belső tisztítás, kerámia bevonat és waxolás bemutatása.
+            </p>
+            <div class="tag-row">
+              <span class="tag" data-i18n="proj.websiteTag">Weboldal</span>
+            </div>
           </div>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ FOLYAMAT ============ -->
+  <section id="folyamat">
+    <div class="container">
+      <h2 data-i18n="process.h2">Így készül nálam egy weboldal</h2>
+      <p class="section-lead" data-i18n="process.lead">Akár bemutatkozó oldalról, akár egyedi webalkalmazásról van szó, ugyanazt a négy lépést követem.</p>
+      <ol class="process">
+        <li data-reveal="up">
+          <h3 data-i18n="process.1.title">Egyeztetés</h3>
+          <p data-i18n="process.1.desc">Megismerem a célt, a közönséget és azt, mire van valójában szükség.</p>
+        </li>
+        <li data-reveal="up" style="--i: 1;">
+          <h3 data-i18n="process.2.title">Tervezés</h3>
+          <p data-i18n="process.2.desc">Felépítem a szerkezetet és a látványt, mielőtt egy sor kód is készülne.</p>
+        </li>
+        <li data-reveal="up" style="--i: 2;">
+          <h3 data-i18n="process.3.title">Fejlesztés</h3>
+          <p data-i18n="process.3.desc">Gyors, reszponzív, karbantartható kódot írok, közben folyamatosan megmutatom, hol tartunk.</p>
+        </li>
+        <li data-reveal="up" style="--i: 3;">
+          <h3 data-i18n="process.4.title">Élesítés</h3>
+          <p data-i18n="process.4.desc">Kiteszem az oldalt, és az indulás után is elérhető maradok.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -1099,50 +1842,62 @@
     </div>
   </section>
   ============ /VÁLLALKOZÁS ============ -->
-
   <!-- ============ KAPCSOLAT ============ -->
-  <section id="kapcsolat" style="background: var(--bg-soft); border-top: 1px solid var(--border);">
+  <section id="kapcsolat" class="section-alt">
     <div class="container contact-wrap">
-      <div class="section-label" data-i18n="contact.label">Kapcsolat</div>
       <h2 data-i18n="contact.h2">Dolgozzunk együtt!</h2>
       <p data-i18n="contact.p">
         Ha kérdésed van, projektötleted, vagy csak beszélgetnél egy jót technológiáról,
         keress bátran bármelyik csatornán.
       </p>
       <div class="contact-cards">
-        <a href="mailto:zsoriadam10@gmail.com" class="contact-card reveal">
-          <div class="icon">✉️</div>
-          <h4>E-mail</h4>
-          <p>zsoriadam10@gmail.com</p>
-        </a>
-        <a href="tel:+36703293866" class="contact-card reveal">
-          <div class="icon">📞</div>
-          <h4 data-i18n="contact.phone">Telefon</h4>
-          <p>+36 70 329 3866</p>
-        </a>
-        <div class="contact-card reveal">
-          <div class="icon">📍</div>
-          <h4 data-i18n="contact.location">Helyszín</h4>
-          <p data-i18n="contact.locationValue">Budapest, Magyarország</p>
+        <div class="contact-item" data-reveal="focus">
+          <a href="mailto:zsoriadam10@gmail.com" class="contact-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+            <h3>E-mail</h3>
+            <p>zsoriadam10@gmail.com</p>
+          </a>
+          <button type="button" class="copy-btn" data-copy="zsoriadam10@gmail.com" data-i18n-attr="aria-label:contact.copy|title:contact.copy" aria-label="E-mail cím másolása" title="E-mail cím másolása">
+            <svg class="icon i-copy" aria-hidden="true"><use href="#i-copy"/></svg>
+            <svg class="icon i-check" aria-hidden="true"><use href="#i-check"/></svg>
+          </button>
+        </div>
+        <div class="contact-item" data-reveal="focus" style="--i: 1;">
+          <a href="tel:+36703293866" class="contact-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            <h3 data-i18n="contact.phone">Telefon</h3>
+            <p>+36 70 329 3866</p>
+          </a>
+        </div>
+        <div class="contact-item" data-reveal="focus" style="--i: 2;">
+          <div class="contact-card">
+            <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            <h3 data-i18n="contact.location">Helyszín</h3>
+            <p data-i18n="contact.locationValue">Budapest, Magyarország</p>
+          </div>
         </div>
       </div>
       <div class="socials">
         <a href="https://github.com/ZsAdam06" target="_blank" rel="noopener" class="social-link" aria-label="GitHub" title="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.77 1.04.77 2.1 0 1.52-.01 2.75-.01 3.12 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.77 1.04.77 2.1 0 1.52-.01 2.75-.01 3.12 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
         </a>
         <a href="https://www.linkedin.com/in/adam-zsori/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn" title="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
         </a>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ============ LÁBLÉC ============ -->
   <footer>
-    <div class="container">
-      © <span id="year"></span> <span data-i18n="brand.name">Zsóri Ádám</span> · <span data-i18n="footer.rights">Minden jog fenntartva</span>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> <span data-i18n="brand.namePlain">Zsóri Ádám</span> · <span data-i18n="footer.rights">Minden jog fenntartva</span></div>
+      <a href="#" class="to-top"><span data-i18n="footer.top">Vissza a tetejére</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-u"/></svg></a>
     </div>
   </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
 
   <script>
     // ---------- Fordítások / Translations ----------
@@ -1218,6 +1973,37 @@
       'footer.rights': { hu: 'Minden jog fenntartva', en: 'All rights reserved' },
     };
 
+    Object.assign(translations, {
+      'hero.h1': {
+        hu: '<span class="line"><span>Szia,</span></span><span class="line"><span class="name">Zsóri Ádám</span></span><span class="line"><span>vagyok.</span></span>',
+        en: '<span class="line"><span>Hi, I\'m</span></span><span class="line"><span class="name">Ádám Zsóri</span></span>',
+      },
+      'a11y.skip': { hu: 'Ugrás a tartalomra', en: 'Skip to content' },
+      'marquee.aria': { hu: 'Technológiák, amikkel dolgozom', en: 'Technologies I work with' },
+      'about.fact4.title': { hu: 'Nyelvek', en: 'Languages' },
+      'about.fact4.sub': { hu: 'Magyar (anyanyelv) · angol (B2)', en: 'Hungarian (native) · English (B2)' },
+      'strength.1': { hu: 'Problémamegoldás', en: 'Problem-solving' },
+      'strength.2': { hu: 'Csapatmunka', en: 'Teamwork' },
+      'strength.3': { hu: 'Alkalmazkodóképesség', en: 'Adaptability' },
+      'strength.4': { hu: 'Kommunikáció', en: 'Communication' },
+      'edu.h2': { hu: 'Tanulmányok', en: 'Education' },
+      'proj.private': { hu: 'privát', en: 'private' },
+      'process.h2': { hu: 'Így készül nálam egy weboldal', en: 'How I build a website' },
+      'process.lead': { hu: 'Akár bemutatkozó oldalról, akár egyedi webalkalmazásról van szó, ugyanazt a négy lépést követem.', en: 'Whether it\'s a landing page or a custom web app, I follow the same four steps.' },
+      'process.1.title': { hu: 'Egyeztetés', en: 'Discovery' },
+      'process.1.desc': { hu: 'Megismerem a célt, a közönséget és azt, mire van valójában szükség.', en: 'I get to know the goal, the audience and what is actually needed.' },
+      'process.2.title': { hu: 'Tervezés', en: 'Design' },
+      'process.2.desc': { hu: 'Felépítem a szerkezetet és a látványt, mielőtt egy sor kód is készülne.', en: 'I shape the structure and the look before a single line of code is written.' },
+      'process.3.title': { hu: 'Fejlesztés', en: 'Development' },
+      'process.3.desc': { hu: 'Gyors, reszponzív, karbantartható kódot írok, közben folyamatosan megmutatom, hol tartunk.', en: 'I write fast, responsive, maintainable code and keep you posted on progress.' },
+      'process.4.title': { hu: 'Élesítés', en: 'Launch' },
+      'process.4.desc': { hu: 'Kiteszem az oldalt, és az indulás után is elérhető maradok.', en: 'I ship the site and stay available after launch.' },
+      'contact.copy': { hu: 'E-mail cím másolása', en: 'Copy e-mail address' },
+      'contact.copied': { hu: 'E-mail cím a vágólapon', en: 'E-mail address copied' },
+      'contact.copyFail': { hu: 'Nem sikerült másolni – jelöld ki kézzel', en: 'Couldn\'t copy – please select it manually' },
+      'footer.top': { hu: 'Vissza a tetejére', en: 'Back to top' },
+    });
+
     const pageTitles = {
       hu: 'Zsóri Ádám — Full-stack fejlesztő',
       en: 'Ádám Zsóri — Full-stack Developer',
@@ -1227,10 +2013,13 @@
       en: 'Personal site of Ádám Zsóri, full-stack developer – experience, projects and web development services.',
     };
 
-    function setLanguage(lang) {
-      if (lang !== 'en') lang = 'hu';
+    const root = document.documentElement;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let currentLang = 'hu';
 
-      document.documentElement.lang = lang;
+    function applyLanguage(lang) {
+      currentLang = lang;
+      root.lang = lang;
       document.title = pageTitles[lang];
 
       const descMeta = document.querySelector('meta[name="description"]');
@@ -1250,42 +2039,155 @@
       });
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+        const on = btn.dataset.lang === lang;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on);
       });
 
       try { localStorage.setItem('lang', lang); } catch (e) {}
     }
 
+    function setLanguage(lang, animate) {
+      if (lang !== 'en') lang = 'hu';
+      if (animate && lang === currentLang) return;
+      if (animate && document.startViewTransition && !reducedMotion) {
+        document.startViewTransition(() => applyLanguage(lang));
+      } else {
+        applyLanguage(lang);
+      }
+    }
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang, true));
     });
 
     let initialLang = 'hu';
     try { initialLang = localStorage.getItem('lang') || 'hu'; } catch (e) {}
-    setLanguage(initialLang);
+    setLanguage(initialLang, false);
+
+    // A hero belépő csak egyszer fusson le (nyelvváltáskor ne játssza újra)
+    setTimeout(() => root.classList.add('hero-done'), 2600);
 
     // Aktuális év a láblécben
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobil menü
+    // ---------- Mobil menü ----------
     const toggle = document.querySelector('.nav-toggle');
     const links = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
-    links.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => links.classList.remove('open'))
-    );
+    function setMenu(open) {
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    }
+    toggle.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-    // Scroll-reveal animáció
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+    // ---------- Technológia-szalag: végtelenített másolat ----------
+    const track = document.querySelector('.marquee-track');
+    const clone = track.firstElementChild.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+
+    // ---------- Görgetésre megjelenés ----------
+    document.querySelectorAll('.stagger').forEach(group => {
+      [...group.children].forEach((child, n) => child.style.setProperty('--n', Math.min(n, 10)));
+    });
+
+    const revealTargets = document.querySelectorAll('[data-reveal], .stagger, main h2, .process');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.add('in');
+          revealObserver.unobserve(el);
+          // a belépő késleltetése ne maradjon rajta a hover-átmeneteken
+          setTimeout(() => {
+            if (el.hasAttribute('data-reveal')) { el.removeAttribute('data-reveal'); el.style.removeProperty('--i'); }
+            if (el.classList.contains('stagger')) el.classList.add('settled');
+          }, 1600);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+      revealTargets.forEach(el => revealObserver.observe(el));
+
+      // Aktív menüpont
+      const navMap = new Map();
+      links.querySelectorAll('a').forEach(a => navMap.set(a.getAttribute('href').slice(1), a));
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          navMap.forEach(a => a.classList.remove('active'));
+          const link = navMap.get(entry.target.id);
+          if (link) link.classList.add('active');
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s));
+    } else {
+      revealTargets.forEach(el => el.classList.add('in'));
+    }
+
+    // ---------- Görgetéshez kötött elemek: folyamatjelző + idővonal ----------
+    const nav = document.querySelector('nav');
+    const timelines = [...document.querySelectorAll('.timeline')];
+    let ticking = false;
+
+    function onScroll() {
+      ticking = false;
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      nav.classList.toggle('scrolled', y > 24);
+      nav.style.setProperty('--scroll', max > 0 ? Math.min(y / max, 1) : 0);
+      if (y < 200) links.querySelectorAll('a.active').forEach(a => a.classList.remove('active'));
+
+      const trigger = window.innerHeight * 0.72;
+      timelines.forEach(tl => {
+        const rect = tl.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, (trigger - rect.top - 8) / (rect.height - 16)));
+        tl.style.setProperty('--p', p.toFixed(3));
+        tl.querySelectorAll('.timeline-item').forEach(item => {
+          item.classList.toggle('reached', item.getBoundingClientRect().top + 16 < trigger);
+        });
+      });
+    }
+
+    function requestTick() {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick);
+    onScroll();
+
+    // ---------- Kurzort követő fény a projektkártyákon ----------
+    document.querySelectorAll('.spot').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    // ---------- E-mail másolása ----------
+    const toast = document.querySelector('.toast');
+    let toastTimer;
+    function showToast(key) {
+      toast.textContent = translations[key][currentLang];
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy);
+          btn.classList.add('copied');
+          showToast('contact.copied');
+          setTimeout(() => btn.classList.remove('copied'), 2400);
+        } catch (e) {
+          showToast('contact.copyFail');
         }
       });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
   </script>
 </body>
 </html>
